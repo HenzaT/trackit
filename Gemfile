@@ -70,3 +70,5 @@ group :test do
 end
 
 gem "minitest", "< 6", group: :test
+
+gem "bundler-audit", "~> 0.9.3", groups: [:development, :test], require: false
