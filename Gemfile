@@ -74,3 +74,5 @@ gem "minitest", "< 6", group: :test
 gem "bundler-audit", "~> 0.9.3", groups: [:development, :test], require: false
 
 gem "brakeman", "~> 8.1", groups: [:development, :test], require: false
+
+gem "rubocop", "~> 1.92", groups: [:development, :test], require: false
