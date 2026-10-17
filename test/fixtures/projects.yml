@@ -2,10 +2,10 @@
 
 one:
   name: MyString
-  status: MyString
+  status: open
   notes: MyText
 
 two:
   name: MyString
-  status: MyString
+  status: open
   notes: MyText

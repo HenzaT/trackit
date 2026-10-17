@@ -2,12 +2,12 @@
 
 one:
   name: MyString
-  status: MyString
+  status: open
   notes: MyText
   project: one
 
 two:
   name: MyString
-  status: MyString
+  status: open
   notes: MyText
   project: two
