@@ -1,0 +1,8 @@
+<header>
+  <%= link_to 'trackit', root_path %>
+  <div role="group" class="filter button-group">
+    <%= link_to 'Open', root_path(status: 'open') %>
+    <%= link_to 'Paused', root_path(status: 'paused') %>
+    <%= link_to 'Completed', root_path(status: 'closed') %>
+  </div>
+</header>
