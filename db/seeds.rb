@@ -11,7 +11,7 @@ puts '-------- Database Cleaned! --------'
 # Create projects
 puts '-------- Creating Projects --------'
 projects = {}
-project_names = ['The Forest', 'Black and Red', 'Seven', 'Post']
+project_names = [ 'The Forest', 'Black and Red', 'Seven', 'Post' ]
 project_names.each do |name|
   projects[name] = Project.find_or_create_by!(name: name)
 end
