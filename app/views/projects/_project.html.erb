@@ -3,7 +3,7 @@
     <h2><%= project.name %></h2>
     <p><%= project.status.titleize %></p>
   </div>
-  <% if project.notes %>
+  <% if project.notes && project.notes != '' %>
     <div>
       <strong class="block font-medium mb-1">Notes:</strong>
       <%= project.notes %>

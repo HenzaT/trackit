@@ -78,3 +78,5 @@ gem "brakeman", "~> 8.1", groups: [ :development, :test ], require: false
 gem "rubocop", "~> 1.92", groups: [ :development, :test ], require: false
 
 gem "rubocop-rails-omakase", "~> 1.1", group: :development, require: false
+
+gem "font-awesome-rails"

@@ -2,4 +2,36 @@
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    /* Colors */
+  --color-cream: #fdfcf4;
+  --color-terracotta: #e07a5f;
+  --color-indigo-ink: #3d405b;
+  --color-mint: #d1fde7;
+  --color-sand: #fbdeae;
+  --color-sage: #3b9d6c;
+
+  --color-berry: #9b287b;
+  --color-plum: #5c164e;
+  --color-aubergine: #402039;
+  --color-ink: #170f11;
+
+  /* light mode values */
+  --color-page: var(--color-cream);
+  --color-card: #ffffff99;
+  --color-body: var(--color-indigo-ink);
+  --color-line: var(--color-indigo-ink);
+  --color-accent: var(--color-terracotta);
+  --color-open: var(--color-mint);
+  --color-paused: var(--color-sand);
 }
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --color-page: var(--color-ink);
+    --color-card: var(--color-aubergine);
+    --color-body: var(--color-mint);
+    --color-line: var(--color-plum);
+    --color-accent: var(--color-berry);
+  }
+} */

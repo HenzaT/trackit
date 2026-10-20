@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects or /projects.json
   def index
-    @projects = Project.includes(:tasks)
+    @projects = Project.includes(:tasks).in_order_of(:status, %w[open paused closed])
     @projects = Project.where(status: params[:status]) if params[:status].present?
   end
 
