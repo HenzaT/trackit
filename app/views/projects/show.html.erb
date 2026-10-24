@@ -5,9 +5,70 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <h1 class="font-bold text-4xl">Showing project</h1>
+  <section class="flex flex-col gap-10">
+    <div class="f-row gap-5">
+      <i class="fa-solid fa-music bg-accent-light text-accent text-xl p-3 rounded-xl"></i>
+      <h1 class="h1"><%= @project.name %></h1>
+    </div>
 
-  <%= render @project %>
+    <div class="f-row justify-between">
+      <button class="bg-open-pill px-3 py-1 font-medium rounded-2xl">
+        <i class="fa-solid fa-circle text-green-500 text-xs"></i>
+        <%= @project.status.titleize %>
+      </button>
+      <%= turbo_frame_tag "create_new_task" do %>
+        <%= link_to new_task_path, class: "btn bg-accent hover:bg-accent-hover text-body" do %>
+          <i class="fa-solid fa-plus text-body"></i>
+          Add Task
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="f-row justify-between">
+      <p>Progress</p>
+      <ul class="f-row gap-1">
+        <li><%= %> Open</li>
+        <li><%= %> Paused</li>
+        <li><%= %> Closed</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="my-10">
+    <div class="flex flex-row items-center gap-3">
+      <h2 class="h2">Tasks</h2>
+      <p class="bg-gray-200 border-1 border-gray-200 px-2 py-1 rounded-lg"><%= @project.tasks.count %></p>
+    </div>
+    <% if @project.tasks %>
+      <div class="flex flex-col sm:flex-row gap-5 my-5">
+        <% @project.tasks.each do |task| %>
+          <article class="flex flex-col p-5 border-1 rounded-xl <%= status_classes(task) %>">
+            <div class="flex flex-row justify-between">
+              <p><%= task.status.titleize %></p>
+              <%= link_to "Edit", edit_task_path(task), class: "rounded-md" %>
+            </div>
+            <h3><%= task.name %></h3>
+            <% if task.notes %>
+              <p class="line-clamp-2"><%= task.notes %></p>
+            <% end %>
+          </article>
+        <% end %>
+        <%= turbo_frame_tag "create_new_task" do %>
+          <%= link_to new_task_path do %>
+            <article class="border-1 border-gray-500 border-dashed rounded-xl text-center p-5">
+              <p>Add task</p>
+            </article>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+
+  <section>
+    <article class="bg-white border-1 rounded-xl border-gray-500 p-5">
+      <h2 class="h2">Project Details</h2>
+    </article>
+  </section>
 
   <%= link_to "Edit this project", edit_project_path(@project), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= link_to "Back to projects", projects_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>

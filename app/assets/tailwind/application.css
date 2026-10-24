@@ -6,24 +6,45 @@
     /* Colors */
   --color-cream: #fdfcf4;
   --color-terracotta: #e07a5f;
-  --color-indigo-ink: #3d405b;
-  --color-mint: #d1fde7;
-  --color-sand: #fbdeae;
+  --color-indigo-ink: #060609;
+  --color-mint: #e8fef3;
+  --color-sand: #fdefd7;
   --color-sage: #3b9d6c;
 
-  --color-berry: #9b287b;
-  --color-plum: #5c164e;
-  --color-aubergine: #402039;
-  --color-ink: #170f11;
+  /* Color Variations */
+  --color-mint-dark: #7d988b;
+  --color-mint-pill: #c7f0db;
+  --color-sand-dark: #978568;
+  --color-terracotta-light: #faebe7;
+
+  /* Hover */
+  --color-terracotta-hover: #be6851;
 
   /* light mode values */
   --color-page: var(--color-cream);
   --color-card: #ffffff99;
   --color-body: var(--color-indigo-ink);
   --color-line: var(--color-indigo-ink);
+
   --color-accent: var(--color-terracotta);
+  --color-accent-light: var(--color-terracotta-light);
+
   --color-open: var(--color-mint);
+  --color-open-dark: var(--color-mint-dark);
+  --color-open-pill: var(--color-mint-pill);
+
   --color-paused: var(--color-sand);
+  --color-paused-dark: var(--color-sand-dark);
+
+
+  /* hover */
+  --color-accent-hover: var(--color-terracotta-hover);
+
+  /* Dark Mode */
+  --color-berry: #9b287b;
+  --color-plum: #5c164e;
+  --color-aubergine: #402039;
+  --color-ink: #170f11;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -35,3 +56,21 @@
     --color-accent: var(--color-berry);
   }
 } */
+
+@layer components {
+  .h1 {
+    @apply text-4xl
+  }
+
+  .h2 {
+    @apply text-3xl
+  }
+
+  .btn {
+    @apply rounded-xl px-3.5 py-2.5 block font-medium
+  }
+
+  .f-row {
+    @apply flex flex-row items-center
+  }
+}
