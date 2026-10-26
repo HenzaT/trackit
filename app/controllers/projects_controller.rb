@@ -9,7 +9,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
-
     @projects = Project.includes(:tasks).in_order_of(:status, %w[open paused closed])
     @projects = Project.where(status: params[:status]) if params[:status].present?
   end
