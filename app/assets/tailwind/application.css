@@ -15,6 +15,7 @@
   --color-mint-dark: #7d988b;
   --color-mint-pill: #c7f0db;
   --color-sand-dark: #978568;
+  --color-sand-pill: #fbe0ae;
   --color-terracotta-light: #faebe7;
 
   /* Hover */
@@ -35,6 +36,7 @@
 
   --color-paused: var(--color-sand);
   --color-paused-dark: var(--color-sand-dark);
+  --color-paused-pill: var(--color-sand-pill);
 
 
   /* hover */
@@ -70,7 +72,19 @@
     @apply rounded-xl px-3.5 py-2.5 block font-medium
   }
 
+  .pill-btn {
+    @apply flex flex-row items-center gap-2 px-3 py-1 font-medium rounded-2xl
+  }
+
+  .card {
+    @apply rounded-xl border-1 p-5
+  }
+
   .f-row {
     @apply flex flex-row items-center
+  }
+
+  .f-col {
+    @apply flex flex-col
   }
 }

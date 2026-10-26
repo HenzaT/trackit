@@ -5,6 +5,8 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
+  <%= link_to "Back to projects", projects_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+
   <section class="flex flex-col gap-10">
     <div class="f-row gap-5">
       <i class="fa-solid fa-music bg-accent-light text-accent text-xl p-3 rounded-xl"></i>
@@ -12,10 +14,10 @@
     </div>
 
     <div class="f-row justify-between">
-      <button class="bg-open-pill px-3 py-1 font-medium rounded-2xl">
-        <i class="fa-solid fa-circle text-green-500 text-xs"></i>
+      <span class="pill-btn <%= status_classes_pill(@project) %>">
+        <i class="fa-solid <%= pill_icon(@project) %>"></i>
         <%= @project.status.titleize %>
-      </button>
+      </span>
       <%= turbo_frame_tag "create_new_task" do %>
         <%= link_to new_task_path, class: "btn bg-accent hover:bg-accent-hover text-body" do %>
           <i class="fa-solid fa-plus text-body"></i>
@@ -24,14 +26,23 @@
       <% end %>
     </div>
 
-    <div class="f-row justify-between">
+    <article class="card f-row justify-between bg-white border-gray-400">
       <p>Progress</p>
-      <ul class="f-row gap-1">
-        <li><%= %> Open</li>
-        <li><%= %> Paused</li>
-        <li><%= %> Closed</li>
+      <ul class="f-row gap-3 text-xs">
+        <li>
+          <span class="text-lg"><%= @project.task_status_count['open'] %></span>
+          Open
+        </li>
+        <li>
+          <span class="text-lg"><%= @project.task_status_count['paused'] %></span>
+          Paused
+        </li>
+        <li>
+          <span class="text-lg"><%= @project.task_status_count['closed'] %></span>
+          Closed
+        </li>
       </ul>
-    </div>
+    </article>
   </section>
 
   <section class="my-10">
@@ -42,10 +53,18 @@
     <% if @project.tasks %>
       <div class="flex flex-col sm:flex-row gap-5 my-5">
         <% @project.tasks.each do |task| %>
-          <article class="flex flex-col p-5 border-1 rounded-xl <%= status_classes(task) %>">
-            <div class="flex flex-row justify-between">
-              <p><%= task.status.titleize %></p>
-              <%= link_to "Edit", edit_task_path(task), class: "rounded-md" %>
+          <article class="card flex flex-col <%= status_classes_card(task) %>">
+            <div class="f-row justify-between">
+              <span class="pill-btn <%= status_classes_pill(task) %>">
+                <i class="fa-solid <%= pill_icon(task) %>"></i>
+                <%= task.status.titleize %>
+              </span>
+              <%= link_to edit_project_path(@project) do %>
+                <span class="flex flex-row gap-2 items-center">
+                  <i class="fa-solid fa-pencil"></i>
+                  Edit
+                </span>
+              <% end %>
             </div>
             <h3><%= task.name %></h3>
             <% if task.notes %>
@@ -55,8 +74,9 @@
         <% end %>
         <%= turbo_frame_tag "create_new_task" do %>
           <%= link_to new_task_path do %>
-            <article class="border-1 border-gray-500 border-dashed rounded-xl text-center p-5">
-              <p>Add task</p>
+            <article class="card border-gray-500 border-dashed text-center">
+              <i class="fa-solid fa-plus text-accent"></i>
+              Add task
             </article>
           <% end %>
         <% end %>
@@ -65,12 +85,43 @@
   </section>
 
   <section>
-    <article class="bg-white border-1 rounded-xl border-gray-500 p-5">
-      <h2 class="h2">Project Details</h2>
+    <article class="card f-col gap-7 bg-white border-gray-400">
+      <div class="f-row justify-between">
+        <h2 class="text-xl font-medium">Project Details</h2>
+        <i class="fa-solid fa-circle-info text-xl"></i>
+      </div>
+      <p><%= @project.notes %></p>
+      <ul class="f-col gap-3">
+        <li class="flex flex-row justify-between">
+          <p>Created</p>
+          <p><%= @project.format_datetime(@project.created_at) %></p>
+        </li>
+        <li class="flex flex-row justify-between">
+          <p>Last updated</p>
+          <p><%= @project.format_datetime(@project.updated_at) %></p>
+        </li>
+      </ul>
+      <h3>PROJECT ACTIONS</h3>
+      <ul>
+        <li>
+          <%= link_to edit_project_path(@project), class: "flex flex-row justify-between items-center" do %>
+            <span class="flex flex-row gap-4 items-center">
+              <i class="fa-solid fa-pencil"></i>
+              Edit project
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+          <% end %>
+        </li>
+        <li>
+          <%= button_to @project, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "flex flex-row justify-between items-center" do %>
+            <span class="flex flex-row gap-4 items-center">
+              <i class="fa-solid fa-trash-can"></i>
+              Delete project
+            </span>
+            <i class="fa-solid fa-chevron-right"></i>
+          <% end %>
+        </li>
+      </ul>
     </article>
   </section>
-
-  <%= link_to "Edit this project", edit_project_path(@project), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to projects", projects_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this project", @project, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
 </div>
