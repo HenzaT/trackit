@@ -1,9 +1,6 @@
-<header class="flex justify-between pt-5 px-5">
-  <%= link_to 'trackit', root_path %>
-  <div role="group" class="flex gap-2">
-    <%= link_to 'Open', root_path(status: 'open') %>
-    <%= link_to 'Paused', root_path(status: 'paused') %>
-    <%= link_to 'Completed', root_path(status: 'closed') %>
-    <%= fa_icon "circle", class: "w-6 h-6 text-3xl text-red-500" %>
-  </div>
+<header class="flex justify-between border-b border-gray-400 p-5">
+  <%= link_to projects_path, class: "f-row gap-3" do %>
+    <i class="fa-solid fa-arrow-left"></i>
+    Projects
+  <% end %>
 </header>

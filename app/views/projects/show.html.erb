@@ -5,8 +5,6 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <%= link_to "Back to projects", projects_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-
   <section class="flex flex-col gap-10">
     <div class="f-row gap-5">
       <i class="fa-solid fa-music bg-accent-light text-accent text-xl p-3 rounded-xl"></i>
@@ -19,7 +17,7 @@
         <%= @project.status.titleize %>
       </span>
       <%= turbo_frame_tag "create_new_task" do %>
-        <%= link_to new_task_path, class: "btn bg-accent hover:bg-accent-hover text-body" do %>
+        <%= link_to new_task_path, class: "add-btn" do %>
           <i class="fa-solid fa-plus text-body"></i>
           Add Task
         <% end %>
@@ -53,7 +51,7 @@
     <% if @project.tasks %>
       <div class="flex flex-col sm:flex-row gap-5 my-5">
         <% @project.tasks.each do |task| %>
-          <article class="card flex flex-col <%= status_classes_card(task) %>">
+          <article class="card flex flex-col gap-5 <%= status_classes_card(task) %>">
             <div class="f-row justify-between">
               <span class="pill-btn <%= status_classes_pill(task) %>">
                 <i class="fa-solid <%= pill_icon(task) %>"></i>
@@ -66,7 +64,7 @@
                 </span>
               <% end %>
             </div>
-            <h3><%= task.name %></h3>
+            <h3 class="text-2xl font-medium"><%= task.name %></h3>
             <% if task.notes %>
               <p class="line-clamp-2"><%= task.notes %></p>
             <% end %>

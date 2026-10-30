@@ -5,32 +5,46 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Projects</h1>
-    <%= link_to "New", new_project_path, class: "btn bg-blue-600 hover:bg-blue-500 text-white" %>
-    <button command="show-modal" commandfor="my-dialog">New</button>
-  </div>
+  <section class="flex flex-col gap-10">
+    <div class="f-row justify-between">
+      <h1 class="h1">Projects</h1>
+      <%= link_to new_project_path, class: "add-btn" do %>
+        <i class="fa-solid fa-plus text-body"></i>
+        New project
+      <% end %>
+      <%# <button command="show-modal" commandfor="my-dialog">New</button> %>
+    </div>
 
-  <dialog id="my-dialog">
+    <article class="card f-row justify-between bg-white border-gray-400">
+      <p>Progress</p>
+      <ul class="f-row gap-3 text-xs">
+        <li>
+          Open
+        </li>
+        <li>
+          Paused
+        </li>
+        <li>
+          Closed
+        </li>
+      </ul>
+    </article>
+  </section>
+
+  <%# <dialog id="my-dialog">
     <p>Hello</p>
     <button commandfor="my-dialog" command="close">Close</button>
-  </dialog>
+  </dialog> %>
 
-  <div id="projects" class="min-w-full divide-y divide-gray-200 space-y-5">
+  <section id="projects" class="my-10">
     <% if @projects.any? %>
       <% @projects.each do |project| %>
         <div class="flex flex-col justify-between pb-5 sm:pb-0">
           <%= render project %>
-          
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-3">
-            <%= link_to "Show", project, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 m-0 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_project_path(project), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 m-0 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= button_to "Delete", project, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 m-0 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
         </div>
       <% end %>
     <% else %>
       <p class="text-center my-10">No projects found.</p>
     <% end %>
-  </div>
+  </section>
 </div>

@@ -76,6 +76,10 @@
     @apply flex flex-row items-center gap-2 px-3 py-1 font-medium rounded-2xl
   }
 
+  .add-btn {
+    @apply rounded-xl px-3.5 py-2.5 block font-medium bg-accent hover:bg-accent-hover text-body
+  }
+
   .card {
     @apply rounded-xl border-1 p-5
   }

@@ -4,6 +4,10 @@ class Project < ApplicationRecord
   validates :name, presence: true
   validates :status, inclusion: { in: %w[open paused closed] }
 
+  def status_count
+    group(:status).count
+  end
+
   def task_status_count
     tasks.group(:status).count
   end
